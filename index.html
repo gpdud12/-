@@ -3,124 +3,155 @@
 <head>
 <meta charset="UTF-8">
 <title>지구를 지키는 룰렛 게임</title>
+
 <style>
-  body {
-    margin: 0;
-    background: #efffee;
-    font-family: "Arial", sans-serif;
-    text-align: center;
-  }
+body {
+  margin: 0;
+  background: #f2fff0;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
 
-  h1 {
-    color: #087528;
-    font-size: 42px;
-    margin: 35px 0 20px;
-  }
+h1 {
+  color: #16702a;
+  font-size: 42px;
+  margin: 20px 0 10px;
+}
 
-  .roulette-wrap {
-    position: relative;
-    width: 700px;
-    height: 700px;
-    margin: 0 auto;
-  }
+.game {
+  position: relative;
+  width: 820px;
+  height: 820px;
+  margin: 0 auto;
+}
 
-  .pointer {
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 35px solid transparent;
-    border-right: 35px solid transparent;
-    border-top: 90px solid red;
-    z-index: 10;
-  }
+.pointer {
+  position: absolute;
+  top: 20px;
+  left: 375px;
+  width: 0;
+  height: 0;
+  border-left: 35px solid transparent;
+  border-right: 35px solid transparent;
+  border-top: 85px solid red;
+  z-index: 100;
+}
 
-  .wheel {
-    width: 700px;
-    height: 700px;
-    border-radius: 50%;
-    border: 8px solid #2f9e44;
-    position: relative;
-    overflow: hidden;
-    transition: transform 4s ease-out;
-    background: conic-gradient(
-      #ffc7d5 0deg 51.4deg,
-      #c9b6ff 51.4deg 102.8deg,
-      #fff2a6 102.8deg 154.2deg,
-      #c9f5c8 154.2deg 205.6deg,
-      #bfe9ff 205.6deg 257deg,
-      #ffd4c2 257deg 308.4deg,
-      #c6fff2 308.4deg 360deg
-    );
-  }
+.wheel {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  width: 660px;
+  height: 660px;
+  border-radius: 50%;
+  border: 10px solid #35a243;
+  overflow: hidden;
+  transition: transform 4.5s cubic-bezier(.12,.8,.18,1);
+  background: conic-gradient(
+    from -25.7deg,
+    #ffcfdc 0deg 51.43deg,
+    #d9c9ff 51.43deg 102.86deg,
+    #fff0a8 102.86deg 154.29deg,
+    #c9f7c7 154.29deg 205.72deg,
+    #c8ecff 205.72deg 257.15deg,
+    #ffd8c8 257.15deg 308.58deg,
+    #c9fff4 308.58deg 360deg
+  );
+}
 
-  .item {
-    position: absolute;
-    width: 140px;
-    text-align: center;
-    transform: translate(-50%, -50%);
-  }
+/* 칸 경계선 */
+.line {
+  position: absolute;
+  width: 4px;
+  height: 330px;
+  background: white;
+  left: 328px;
+  top: 0;
+  transform-origin: bottom center;
+}
 
-  .item img {
-    width: 90px;
-    height: 90px;
-    object-fit: contain;
-    background: white;
-    border-radius: 50%;
-    padding: 15px;
-  }
+.line1 { transform: rotate(25.7deg); }
+.line2 { transform: rotate(77.1deg); }
+.line3 { transform: rotate(128.6deg); }
+.line4 { transform: rotate(180deg); }
+.line5 { transform: rotate(231.4deg); }
+.line6 { transform: rotate(282.9deg); }
+.line7 { transform: rotate(334.3deg); }
 
-  .item p {
-    display: inline-block;
-    margin-top: 8px;
-    padding: 8px 18px;
-    background: white;
-    border-radius: 20px;
-    font-size: 20px;
-    font-weight: bold;
-  }
+.item {
+  position: absolute;
+  width: 135px;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+}
 
-  .center {
-    position: absolute;
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    background: #2faa45;
-    color: white;
-    font-size: 28px;
-    font-weight: bold;
-    line-height: 110px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border: 6px solid white;
-    z-index: 5;
-  }
+.card {
+  width: 105px;
+  height: 105px;
+  background: white;
+  border: 5px solid #df351d;
+  border-radius: 8px;
+  margin: 0 auto 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
 
-  button {
-    margin-top: 25px;
-    background: #2faa45;
-    color: white;
-    border: none;
-    border-radius: 12px;
-    padding: 16px 45px;
-    font-size: 22px;
-    font-weight: bold;
-    cursor: pointer;
-  }
+.card img {
+  width: 95px;
+  height: 95px;
+  object-fit: contain;
+}
 
-  button:hover {
-    background: #238c38;
-  }
+.name {
+  width: 135px;
+  background: rgba(255,255,255,0.92);
+  border-radius: 18px;
+  padding: 7px 4px;
+  font-size: 18px;
+  font-weight: bold;
+  color: black;
+  box-sizing: border-box;
+}
 
-  #result {
-    margin-top: 12px;
-    font-size: 20px;
-    font-weight: bold;
-    color: #087528;
-  }
+.center {
+  position: absolute;
+  top: 278px;
+  left: 278px;
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+  background: #35a243;
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  border: 7px solid white;
+}
+
+button {
+  margin-top: 0;
+  font-size: 27px;
+  padding: 15px 55px;
+  border: none;
+  border-radius: 20px;
+  background: #35a243;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.result {
+  margin-top: 10px;
+  font-size: 25px;
+  font-weight: bold;
+  color: #16702a;
+}
 </style>
 </head>
 
@@ -128,85 +159,107 @@
 
 <h1>🌿 지구를 지키는 룰렛 게임 🌿</h1>
 
-<div class="roulette-wrap">
+<div class="game">
   <div class="pointer"></div>
 
   <div class="wheel" id="wheel">
-    <div class="item" style="top: 13%; left: 50%;">
-      <img src="비닐봉투.PNG">
-      <p>비닐봉투</p>
+    <div class="line line1"></div>
+    <div class="line line2"></div>
+    <div class="line line3"></div>
+    <div class="line line4"></div>
+    <div class="line line5"></div>
+    <div class="line line6"></div>
+    <div class="line line7"></div>
+
+    <div class="item" data-angle="0">
+      <div class="card"><img src="비닐봉투.PNG"></div>
+      <div class="name">비닐봉투</div>
     </div>
 
-    <div class="item" style="top: 28%; left: 78%;">
-      <img src="일회용 빨대.PNG">
-      <p>일회용 빨대</p>
+    <div class="item" data-angle="51.43">
+      <div class="card"><img src="일회용 빨대.PNG"></div>
+      <div class="name">일회용 빨대</div>
     </div>
 
-    <div class="item" style="top: 58%; left: 82%;">
-      <img src="종이컵.PNG">
-      <p>종이컵</p>
+    <div class="item" data-angle="102.86">
+      <div class="card"><img src="종이컵.PNG"></div>
+      <div class="name">종이컵</div>
     </div>
 
-    <div class="item" style="top: 82%; left: 62%;">
-      <img src="일회용 수저 젓가락.PNG">
-      <p>일회용 수저·젓가락</p>
+    <div class="item" data-angle="154.29">
+      <div class="card"><img src="일회용 수저 젓가락.PNG"></div>
+      <div class="name">일회용 수저·젓가락</div>
     </div>
 
-    <div class="item" style="top: 82%; left: 38%;">
-      <img src="물티슈.PNG">
-      <p>물티슈</p>
+    <div class="item" data-angle="205.72">
+      <div class="card"><img src="일회용 물티슈.PNG"></div>
+      <div class="name">물티슈</div>
     </div>
 
-    <div class="item" style="top: 58%; left: 18%;">
-      <img src="비닐우산.PNG">
-      <p>비닐 우산</p>
+    <div class="item" data-angle="257.15">
+      <div class="card"><img src="비닐우산.PNG"></div>
+      <div class="name">비닐 우산</div>
     </div>
 
-    <div class="item" style="top: 28%; left: 22%;">
-      <img src="비닐장갑.PNG">
-      <p>비닐 장갑</p>
+    <div class="item" data-angle="308.58">
+      <div class="card"><img src="비닐장갑.PNG"></div>
+      <div class="name">비닐 장갑</div>
     </div>
+
+    <div class="center">START</div>
   </div>
-
-  <div class="center">START</div>
 </div>
 
 <button onclick="spin()">룰렛 돌리기 ↻</button>
-<div id="result">🎉 당첨: 일회용 빨대 🎉</div>
+<div class="result" id="result"></div>
 
 <script>
-  const wheel = document.getElementById("wheel");
-  const result = document.getElementById("result");
+let degree = 0;
+let spinning = false;
 
-  const items = [
-    "비닐봉투",
-    "일회용 빨대",
-    "종이컵",
-    "일회용 수저·젓가락",
-    "물티슈",
-    "비닐 우산",
-    "비닐 장갑"
-  ];
+const wheelSize = 660;
+const center = wheelSize / 2;
+const radius = 235;
+const section = 360 / 7;
 
-  let currentRotation = 0;
+placeItems();
 
-  function spin() {
-    const randomIndex = Math.floor(Math.random() * items.length);
-    const anglePerItem = 360 / items.length;
+function placeItems() {
+  document.querySelectorAll(".item").forEach(item => {
+    const angle = Number(item.dataset.angle) - 90;
+    const rad = angle * Math.PI / 180;
 
-    const targetAngle = 360 - (randomIndex * anglePerItem) - anglePerItem / 2;
-    const extraSpin = 360 * 5;
+    item.style.left = center + radius * Math.cos(rad) + "px";
+    item.style.top = center + radius * Math.sin(rad) + "px";
+  });
+}
 
-    currentRotation += extraSpin + targetAngle;
+function spin() {
+  if (spinning) return;
 
-    wheel.style.transform = `rotate(${currentRotation}deg)`;
+  spinning = true;
+  document.getElementById("result").innerText = "";
 
-    result.textContent = "룰렛이 돌아가는 중...";
+  const randomDegree = Math.floor(Math.random() * 360);
+  degree += 1800 + randomDegree;
 
-    setTimeout(() => {
-      result.textContent = `🎉 당첨: ${items[randomIndex]} 🎉`;
-    }, 4000);
-  }
+  document.getElementById("wheel").style.transform =
+    `rotate(${degree}deg)`;
+
+  setTimeout(() => {
+    showResult();
+    spinning = false;
+  }, 4600);
+}
+
+function showResult() {
+  const names = document.querySelectorAll(".name");
+  const pointerDegree = (360 - (degree % 360)) % 360;
+  const index = Math.round(pointerDegree / section) % 7;
+
+  document.getElementById("result").innerText =
+    "🎉 당첨: " + names[index].innerText + " 🎉";
+}
 </script>
 
 </body>
